@@ -17,7 +17,7 @@ app.route("/api/hello").get(async (req: Request, res: Response) => {
 		: req.ip;
 	let user_location;
 	let location_weather;
-	console.log(user_IP);
+	console.log(req.headers["x-forwarded-for"], req.ip);
 	// Converting IPV6 TO IPV4
 	if ((user_IP as any).startsWith("::ffff:")) {
 		user_IP = (user_IP as any).split(":").pop();
