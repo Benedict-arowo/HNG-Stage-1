@@ -11,11 +11,11 @@ app.route("/api/hello").get(async (req: Request, res: Response) => {
 	let { visitor_name } = req.query;
 
 	if (!visitor_name) visitor_name = "World";
+	console.log(visitor_name);
 
 	let user_IP = req.ip;
 	let user_location;
 	let location_weather;
-	console.log(req.headers["x-forwarded-for"], req.ip);
 	// Converting IPV6 TO IPV4
 	if ((user_IP as any).startsWith("::ffff:")) {
 		user_IP = (user_IP as any).split(":").pop();
