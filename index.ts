@@ -7,7 +7,7 @@ const app = express();
 app.set("trust proxy", true);
 app.use(morgan("dev"));
 
-app.route("api/hello").get(async (req: Request, res: Response) => {
+app.route("/api/hello").get(async (req: Request, res: Response) => {
 	let { visitor_name } = req.query;
 
 	if (!visitor_name) visitor_name = "World";
