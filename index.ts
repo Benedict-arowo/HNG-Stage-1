@@ -7,7 +7,7 @@ const app = express();
 app.set("trust proxy", true);
 app.use(morgan("dev"));
 
-app.route("/hello").get(async (req: Request, res: Response) => {
+app.route("api/hello").get(async (req: Request, res: Response) => {
 	let { visitor_name } = req.query;
 
 	if (!visitor_name) visitor_name = "World";
@@ -16,6 +16,7 @@ app.route("/hello").get(async (req: Request, res: Response) => {
 	let user_location;
 	let location_weather;
 
+	// Converting IPV6 TO IPV4
 	if ((user_IP as any).startsWith("::ffff:")) {
 		user_IP = (user_IP as any).split(":").pop();
 	}
