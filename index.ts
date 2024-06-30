@@ -12,9 +12,7 @@ app.route("/api/hello").get(async (req: Request, res: Response) => {
 
 	if (!visitor_name) visitor_name = "World";
 
-	let user_IP = req.headers["x-forwarded-for"]
-		? req.headers["x-forwarded-for"][0]
-		: req.ip;
+	let user_IP = req.ip;
 	let user_location;
 	let location_weather;
 	console.log(req.headers["x-forwarded-for"], req.ip);
