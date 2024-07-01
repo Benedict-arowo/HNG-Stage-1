@@ -14,22 +14,11 @@ app.route("/api/hello").get(async (req: Request, res: Response) => {
 	console.log(visitor_name);
 
 	let user_IP = req.ip;
-	let user_location;
 	let location_weather;
+
 	// Converting IPV6 TO IPV4
 	if ((user_IP as any).startsWith("::ffff:")) {
 		user_IP = (user_IP as any).split(":").pop();
-	}
-
-	try {
-		const request = await axios.get(
-			`https://ipinfo.io/${user_IP}?token=${config.IPINFO_TOKEN}`
-		);
-		user_location = request.data;
-	} catch (error: any) {
-		return res.status(400).json({
-			error: "Failed to get user location.",
-		});
 	}
 
 	try {
@@ -52,8 +41,8 @@ app.route("/api/hello").get(async (req: Request, res: Response) => {
 
 	return res.status(200).json({
 		client_ip: user_IP,
-		location: user_location.city,
-		greeting: `Hello ${visitor_name}, the temperature is ${location_weather.current.temp_c} degrees Celcius in ${user_location.city}`,
+		location: location_weather.location.name,
+		greeting: `Hello ${visitor_name}, the temperature is ${location_weather.current.temp_c} degrees Celcius in ${location_weather.location.name}`,
 	});
 });
 
